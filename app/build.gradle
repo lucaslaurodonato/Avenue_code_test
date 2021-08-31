@@ -1,0 +1,109 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.lucasdonato.avenue_code_test"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "BASE_URL", '"https://5f5a8f24d44d640016169133.mockapi.io/"'
+        buildConfigField "String", "API", '"api/"'
+        buildConfigField "String", "PREF_NAME", '"preferences"'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", '"http://5f5a8f24d44d640016169133.mockapi.io/"'
+        }
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs += 'src/main/java'
+            // List and include all res-* folders
+            file('src/main/').listFiles().each {
+                if (it.isDirectory() && it.name.contains('res')) {
+                    res.srcDirs += it.path
+                }
+            }
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$ktxCore"
+    implementation "androidx.appcompat:appcompat:$appCompat"
+    implementation "androidx.constraintlayout:constraintlayout:$constrait"
+    implementation "androidx.recyclerview:recyclerview:$recyclerView"
+    implementation "androidx.cardview:cardview:$cardView"
+    implementation "com.google.android.material:material:$appBar"
+
+    // Maps
+    implementation "com.google.android.gms:play-services-maps:$googleMaps"
+    implementation "com.google.android.gms:play-services-location:$googleLocation"
+
+    // PermissionDispatcher
+    implementation "com.github.hotchemi:permissionsdispatcher:$permissionDispatcherVersion"
+
+    // OkHttp, Retrofit and GSON
+    implementation "com.squareup.okhttp3:okhttp:$okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp"
+    implementation "com.google.code.gson:gson:$gson"
+
+    // Koin for Android
+    implementation "org.koin:koin-android:$koin"
+
+    // Glide (Image loader)
+    implementation "com.github.bumptech.glide:glide:$glide"
+
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
+    // OkHttp, Retrofit and GSON
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitConverterGson"
+    implementation("com.squareup.retrofit2:retrofit:$retrofit") {
+        // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
+        exclude module: 'okhttp'
+    }
+
+    //Shimmer
+    implementation "com.facebook.shimmer:shimmer:$shimmer"
+
+    //MultiDex
+    implementation "androidx.multidex:multidex:$multidexVersion"
+
+    //Lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    //Test
+    testImplementation "junit:junit:$jUnit"
+    androidTestImplementation "androidx.test.ext:junit:$jUnitExt"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+
+    // progress view
+    implementation "com.github.skydoves:progressview:$progressViewVersion"
+
+    // Stetho
+    implementation "com.facebook.stetho:stetho:$stethoVersion"
+    implementation "com.facebook.stetho:stetho-okhttp3:$stethoVersion"
+
+    //Test
+    testImplementation "junit:junit:$jUnit"
+    androidTestImplementation "androidx.test.ext:junit:$jUnitExt"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+
+}

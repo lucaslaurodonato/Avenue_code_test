@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="description_events_details">Detalhes</string>
+    <string name="description_events_day">Dia do evento</string>
+    <string name="description_events_address">Endereço</string>
+    <string name="description_events_open_maps">Abrir GPS</string>
+    <string name="description_events_price">Preço para entrar</string>
+
+</resources>

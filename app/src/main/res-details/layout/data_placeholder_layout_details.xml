@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_background_details">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/guide_line_default" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/guide_line_default" />
+
+    <View
+        android:id="@+id/date"
+        android:layout_width="@dimen/match_constraints"
+        android:layout_height="@dimen/place_holder_text_double"
+        android:layout_marginTop="@dimen/default_margin"
+        android:background="@color/background_shimmer"
+        app:layout_constraintBottom_toTopOf="@+id/address"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <View
+        android:id="@+id/address"
+        android:layout_width="@dimen/match_constraints"
+        android:layout_height="@dimen/place_holder_text_double"
+        android:layout_marginTop="@dimen/small_margin"
+        android:background="@color/background_shimmer"
+        app:layout_constraintBottom_toTopOf="@+id/separation"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
+
+    <View
+        android:id="@+id/separation"
+        android:layout_width="@dimen/match_constraints"
+        android:layout_height="@dimen/separation_view_small"
+        android:layout_marginTop="@dimen/small_margin"
+        android:background="@color/background_shimmer"
+        app:layout_constraintBottom_toTopOf="@+id/price_title"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/address" />
+
+    <View
+        android:id="@+id/price_title"
+        android:layout_width="@dimen/match_constraints"
+        android:layout_height="@dimen/place_holder_text"
+        android:layout_marginTop="@dimen/small_margin"
+        android:background="@color/background_shimmer"
+        app:layout_constraintBottom_toTopOf="@+id/price"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/separation" />
+
+    <View
+        android:id="@+id/price"
+        android:layout_width="@dimen/match_constraints"
+        android:layout_height="@dimen/place_holder_text"
+        android:layout_marginTop="@dimen/small_margin"
+        android:background="@color/background_shimmer"
+        app:layout_constraintBottom_toTopOf="@+id/description"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/price_title" />
+
+    <View
+        android:id="@+id/description"
+        android:layout_width="@dimen/match_constraints"
+        android:layout_height="@dimen/place_holder_text"
+        android:layout_marginTop="@dimen/small_margin"
+        android:background="@color/background_shimmer"
+        app:layout_constraintBottom_toTopOf="@+id/description_message"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/price" />
+
+    <View
+        android:id="@+id/description_message"
+        android:layout_width="@dimen/match_constraints"
+        android:layout_height="@dimen/place_holder_description"
+        android:layout_marginTop="@dimen/small_margin"
+        android:background="@color/background_shimmer"
+        app:layout_constraintBottom_toTopOf="@+id/separation_maps"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <View
+        android:id="@+id/separation_maps"
+        android:layout_width="@dimen/match_constraints"
+        android:layout_height="@dimen/separation_view_small"
+        android:layout_marginTop="@dimen/small_margin"
+        android:background="@color/background_shimmer"
+        app:layout_constraintBottom_toTopOf="@+id/maps"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/description_message" />
+
+    <View
+        android:id="@+id/maps"
+        android:layout_width="@dimen/match_constraints"
+        android:layout_height="@dimen/place_holder_maps"
+        android:layout_marginTop="@dimen/small_margin"
+        android:background="@color/background_shimmer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/separation_maps" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
