@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/shape_background_details"
-    android:elevation="@dimen/default_margin"
     app:cardCornerRadius="@dimen/default_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +44,7 @@
             android:text="@string/description_events_day"
             android:textSize="@dimen/x_large_size"
             app:layout_constraintBottom_toBottomOf="@+id/date_icon"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+            app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
             app:layout_constraintStart_toEndOf="@+id/date_icon"
             app:layout_constraintTop_toTopOf="@+id/date_icon" />
 
@@ -92,10 +91,10 @@
             style="@style/regular"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:textColor="@color/red"
             android:layout_marginStart="@dimen/small_margin"
+            android:gravity="end"
             android:text="@string/description_events_open_maps"
+            android:textColor="@color/red"
             android:textSize="@dimen/x_large_size"
             app:layout_constraintBottom_toBottomOf="@+id/description_event_address"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
@@ -136,11 +135,22 @@
             app:layout_constraintTop_toBottomOf="@+id/view_separation" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/description_event_open_check_in"
+            style="@style/regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description_check_in_button"
+            android:textColor="@color/red"
+            android:textSize="@dimen/x_large_size"
+            app:layout_constraintBottom_toBottomOf="@+id/price_event"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+            app:layout_constraintTop_toTopOf="@+id/description_event_price" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/price_event"
             style="@style/regular"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
             android:drawablePadding="@dimen/minor_margin"
             android:gravity="end"
             android:textColor="@color/black"

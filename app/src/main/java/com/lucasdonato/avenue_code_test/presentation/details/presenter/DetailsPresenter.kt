@@ -1,5 +1,6 @@
 package com.lucasdonato.avenue_code_test.presentation.details.presenter
 
+import CheckIn
 import Events
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -20,6 +21,7 @@ class DetailsPresenter(
 ) : BasePresenter() {
 
     val getEventLiveData = MutableLiveDataResource<Events>()
+    val postCheckInLiveData = MutableLiveDataResource<CheckIn>()
 
     fun getEventsList(id: Int) = runCoroutine {
         getEventLiveData.postValue(Resource.loading())
@@ -32,6 +34,16 @@ class DetailsPresenter(
         )
     }
 
+    fun postCheckIn(checkIn: CheckIn) = runCoroutine {
+        postCheckInLiveData.postValue(Resource.loading())
+        eventsUseCase.postCheckIn(checkIn)?.let {
+            postCheckInLiveData.postValue(Resource.success())
+        } ?: postCheckInLiveData.postValue(Resource.error())
+    } onError {
+        postCheckInLiveData.postValue(
+            Resource.error(AppApplication.context?.getString(it.errorCode.stringCode))
+        )
+    }
 
 }
 

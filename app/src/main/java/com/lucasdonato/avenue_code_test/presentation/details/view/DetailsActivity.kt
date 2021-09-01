@@ -1,6 +1,8 @@
 package com.lucasdonato.avenue_code_test.presentation.details.view
 
+import CheckIn
 import Events
+import android.animation.Animator
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -12,19 +14,23 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.lucasdonato.avenue_code_test.R
 import com.lucasdonato.avenue_code_test.mechanism.constants.EXTRA_RESULTS
-import com.lucasdonato.avenue_code_test.mechanism.extensions.convertLongToTime
-import com.lucasdonato.avenue_code_test.mechanism.extensions.convertToPrice
-import com.lucasdonato.avenue_code_test.mechanism.extensions.gone
-import com.lucasdonato.avenue_code_test.mechanism.extensions.visible
+import com.lucasdonato.avenue_code_test.mechanism.extensions.*
 import com.lucasdonato.avenue_code_test.mechanism.livedata.Status
 import com.lucasdonato.avenue_code_test.mechanism.location.MapManager
+import com.lucasdonato.avenue_code_test.mechanism.permission.AppPermissionUtils
+import com.lucasdonato.avenue_code_test.mechanism.permission.hasPermission
+import com.lucasdonato.avenue_code_test.presentation.details.dialog.CheckInDialog
 import com.lucasdonato.avenue_code_test.presentation.details.presenter.DetailsPresenter
+import com.lucasdonato.avenue_code_test.presentation.onboarding.dialog.WelcomeChoiceDialog
 import kotlinx.android.synthetic.main.activity_details.*
+import kotlinx.android.synthetic.main.activity_details.success_check_in
 import kotlinx.android.synthetic.main.empty_state_mode.*
 import kotlinx.android.synthetic.main.include_card_details.*
 import kotlinx.android.synthetic.main.include_toolbar.view.*
+import kotlinx.android.synthetic.main.success_check_in_layout.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
+import kotlin.io.print
 
 class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -37,6 +43,7 @@ class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private val presenter: DetailsPresenter by inject()
     private val mapManager: MapManager by inject { parametersOf(this) }
+    private var checkInDialog: CheckInDialog? = null
     private var id: Int = 0
     private var lat: Double = 0.0
     private var lng: Double = 0.0
@@ -47,6 +54,7 @@ class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
         receiveData()
         setupObserver()
         setupMaps()
+        checkInButton()
     }
 
     private fun setupMaps() {
@@ -65,12 +73,38 @@ class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun setupObserver() {
         presenter.getEventLiveData.observe(this, Observer {
             when (it.status) {
-                Status.LOADING -> setupLoading()
+                Status.LOADING -> setupLoading(false)
                 Status.SUCCESS -> it.data?.let { setupView(it) }
-                Status.ERROR -> setupError()
-                else -> setupError()
+                Status.ERROR -> setupError(false)
+                else -> setupError(false)
             }
         })
+        presenter.postCheckInLiveData.observe(this, Observer {
+            when (it.status) {
+                Status.LOADING -> setupLoading(true)
+                Status.SUCCESS -> setupCheckInSuccess()
+                Status.ERROR -> setupError(true)
+                else -> setupError(true)
+            }
+        })
+    }
+
+    private fun showCheckInDialog() {
+        checkInDialog = CheckInDialog(context = this@DetailsActivity,
+            listener = object : CheckInDialog.DialogListener {
+                override fun onSubmitButtonClick(name: String, email: String) {
+                    presenter.postCheckIn(CheckIn(eventId = id, name = name, email = email))
+                }
+            }).apply {
+            setCancelable(true)
+            show()
+        }
+    }
+
+    private fun checkInButton() {
+        description_event_open_check_in.setOnClickListener {
+            showCheckInDialog()
+        }
     }
 
     override fun onMapReady(map: GoogleMap?) {
@@ -84,17 +118,42 @@ class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun setupLoading() {
-        loader_details.visible()
-        include_card_details.gone()
+    private fun setupCheckInSuccess(){
+        success_check_in.visible()
+        check_in_animation.addAnimatorListener(object :
+            Animator.AnimatorListener {
+            override fun onAnimationStart(animator: Animator) {}
+            override fun onAnimationEnd(animator: Animator) {
+                loader_check_in.gone()
+                success_check_in.gone()
+                checkInDialog?.dismiss()
+            }
+            override fun onAnimationCancel(animator: Animator) {}
+            override fun onAnimationRepeat(animator: Animator) {}
+        })
     }
 
-    private fun setupError() {
-        loader_details.gone()
-        include_card_details.gone()
-        empty_state.visible()
-        try_again_button.setOnClickListener {
-            presenter.getEventsList(id)
+    private fun setupLoading(isCheckin: Boolean) {
+        if(isCheckin){
+            loader_check_in.visible()
+            checkInDialog?.dismiss()
+        } else {
+            loader_details.visible()
+            include_card_details.gone()
+        }
+    }
+
+    private fun setupError(isCheckin: Boolean) {
+        if(isCheckin){
+            loader_check_in.gone()
+            toast(getString(R.string.error_in_check_in))
+        } else {
+            loader_details.gone()
+            include_card_details.gone()
+            empty_state.visible()
+            try_again_button.setOnClickListener {
+                presenter.getEventsList(id)
+            }
         }
     }
 

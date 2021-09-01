@@ -5,5 +5,19 @@
     <string name="description_events_address">Endereço</string>
     <string name="description_events_open_maps">Abrir GPS</string>
     <string name="description_events_price">Preço para entrar</string>
+    <string name="description_check_in_button">Check-In</string>
+
+     <!--Dialog check in-->
+    <string name="check_in_title">Check-in</string>
+    <string name="check_in_message">Para fazer seu check-in inicial preencha os dados abaixo.</string>
+    <string name="check_in_name">Nome</string>
+    <string name="check_in_email">E-mail</string>
+    <string name="check_in_send_button">Enviar</string>
+
+    <string name="fields_error_check_in_name">Insira um nome</string>
+    <string name="fields_error_check_in_email">Insira um email</string>
+
+    <string name="success_in_check_in">Seu check-in foi realizado com sucesso</string>
+    <string name="error_in_check_in">Erro ao realizar o check-in</string>
 
 </resources>

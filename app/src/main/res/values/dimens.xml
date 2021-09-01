@@ -9,6 +9,10 @@
     <dimen name="ultra_margin">40dp</dimen>
     <dimen name="margin_dialog">40dp</dimen>
 
+    <!--Loader-->
+    <dimen name="loader">300dp</dimen>
+    <dimen name="success">300dp</dimen>
+
     <!--Guide line-->
     <dimen name="guide_line_default">30dp</dimen>
     <dimen name="guide_line_dialog">20dp</dimen>
@@ -31,6 +35,7 @@
 
      <!--Icon size-->
     <dimen name="icon_default">24dp</dimen>
+    <dimen name="icon_dialog">56dp</dimen>
 
     <!--Home-->
     <dimen name="card_recycler">200dp</dimen>
