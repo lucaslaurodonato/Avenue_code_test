@@ -27,6 +27,7 @@ Home Screen              |  Details Screen          | Check-in dialog
   <li><a href="https://lottiefiles.com/" rel="nofollow">Lottie :stuck_out_tongue:</a></li>
   <li><a href="https://developer.android.com/topic/libraries/architecture/livedata" rel="nofollow">LiveData</a></li>
   <li><a href="https://developers.google.com/maps/documentation/android-sdk/overview" rel="nofollow">Google Maps SDK :round_pushpin:</a></li>
+  <li><a href="https://facebook.github.io/shimmer-android/" rel="nofollow">Shimmer by facebook</a></li>
 </ul>
 
 <img src="https://img.shields.io/badge/Kotlin-Android-green"></img>
