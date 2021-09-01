@@ -11,21 +11,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="80dp" />
+        app:layout_constraintGuide_end="@dimen/splash_size" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/text_name"
+        android:layout_width="@dimen/match_constraints"
+        android:layout_height="@dimen/match_constraints"
+        android:scaleType="fitCenter"
+        android:src="@drawable/avenue_logo"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/text_name"
+        android:id="@+id/logo"
         style="@style/bold"
         android:layout_width="@dimen/match_constraints"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/splash_name"
         android:textColor="@color/white"
-        android:textSize="@dimen/x_splash_size"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/x_title_size"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_start"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/splash_animation_II"

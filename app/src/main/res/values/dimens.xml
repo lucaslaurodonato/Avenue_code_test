@@ -8,6 +8,7 @@
     <dimen name="default_margin">16dp</dimen>
     <dimen name="ultra_margin">40dp</dimen>
     <dimen name="margin_dialog">40dp</dimen>
+    <dimen name="splash_size">80dp</dimen>
 
     <!--Loader-->
     <dimen name="loader">300dp</dimen>
