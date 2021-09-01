@@ -8,6 +8,10 @@ Application created just as android proficiency test.
 - [x] Google Maps route
 - [ ] Testes in general
 
+Home Screen              |  Details Screen          | Check-in dialog         
+:-------------------------:|:-------------------------:|:-------------------------:
+![](https://user-images.githubusercontent.com/47648982/131671202-5ae68dc8-bdc8-47fa-8cc3-d6f8ee70e008.png)  |  ![](https://user-images.githubusercontent.com/47648982/131671506-d65c8e21-df8f-4dc3-a833-2bb09c2b227d.png) | ![](https://user-images.githubusercontent.com/47648982/131671528-d1822599-4def-4b60-be43-e3ddb472321a.png)
+
 <h1>:rocket: Technologies</h1>  
 
 <ul>
@@ -17,7 +21,7 @@ Application created just as android proficiency test.
 <li><a href="https://developer.android.com/kotlin/coroutines?gclid=CjwKCAjwgviIBhBkEiwA10D2jzPWvJShY_Pk__NZI33OAPPtNDr9SCn3XdkRj5SGTVYe-bCv9P8NHhoCR7oQAvD_BwE&gclsrc=aw.ds" rel="nofollow"> Kotlin Coroutines</a></li>
   <li><a href="https://lottiefiles.com/" rel="nofollow">Lottie :stuck_out_tongue:</a></li>
   <li><a href="https://developer.android.com/topic/libraries/architecture/livedata" rel="nofollow">LiveData</a></li>
-    <li><a href="https://developers.google.com/maps/documentation/android-sdk/overview" rel="nofollow">Google Maps SDK :round_pushpin:</a></li>
+  <li><a href="https://developers.google.com/maps/documentation/android-sdk/overview" rel="nofollow">Google Maps SDK :round_pushpin:</a></li>
 </ul>
 
 <img src="https://img.shields.io/badge/Kotlin-Android-green"></img>
