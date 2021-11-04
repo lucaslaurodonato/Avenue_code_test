@@ -20,15 +20,14 @@ class OnboardingPresenter(
     private val context: Context
 ) : BasePresenter() {
 
-    val background = intArrayOf(
-        R.drawable.event_photo,
-        R.drawable.event_photo_one,
-        R.drawable.event_photo_two,
-        R.drawable.event_photo_three,
-        R.drawable.event_photo_four,
-    )
-
     fun getRandomBackground(): Drawable? {
+        val background = intArrayOf(
+            R.drawable.event_photo,
+            R.drawable.event_photo_one,
+            R.drawable.event_photo_two,
+            R.drawable.event_photo_three,
+            R.drawable.event_photo_four,
+        )
         return getDrawable(context, background.random())
     }
 

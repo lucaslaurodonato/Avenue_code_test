@@ -11,13 +11,16 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.lucasdonato.avenue_code_test.R
+import com.lucasdonato.avenue_code_test.databinding.ActivityHomeBinding
 import com.lucasdonato.avenue_code_test.mechanism.extensions.gone
 import com.lucasdonato.avenue_code_test.mechanism.extensions.visible
 import com.lucasdonato.avenue_code_test.mechanism.livedata.Status
 import com.lucasdonato.avenue_code_test.mechanism.location.MapManager
+import com.lucasdonato.avenue_code_test.presentation.base.view.BaseActivity
 import com.lucasdonato.avenue_code_test.presentation.details.view.DetailsActivity
 import com.lucasdonato.avenue_code_test.presentation.home.adapter.EventsRecyclerAdapter
 import com.lucasdonato.avenue_code_test.presentation.home.presenter.HomePresenter
+import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.empty_state_mode.*
 import kotlinx.android.synthetic.main.home_content.*
@@ -25,7 +28,7 @@ import kotlinx.android.synthetic.main.home_toolbar.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
+class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home), OnMapReadyCallback {
 
     companion object {
         fun getStartIntent(context: Context) = Intent(context, HomeActivity::class.java)
@@ -38,7 +41,6 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
         presenter.getEventsList()
         setupObserver()
         setupMapsFragment()
@@ -63,9 +65,10 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setupSuccess(results: List<Events>) {
-        loader_home.gone()
-        empty_state.gone()
-        group_home.visible()
+        binding.loaderHome.gone()
+        binding.groupEmptyState.gone()
+
+        binding.groupHome.visible()
         results.let {
             it.forEach {
                 val latLng = LatLng(it.latitude, it.longitude)
@@ -78,9 +81,8 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setupRecyclerView() {
-        events_recycler.apply {
+        binding.homeRecyclerEvents.eventsRecycler.apply {
             adapter = eventsRecyclerAdapter
-            isFocusable = false
             eventsRecyclerAdapter.onItemClickListener = {
                 startActivity(DetailsActivity.getStartIntent(context, it.id))
             }
@@ -88,19 +90,19 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun closeApp() {
-        close_home.setOnClickListener { finish() }
+        binding.toolbar.closeHome.setOnClickListener { finish() }
     }
 
     private fun setupLoading() {
-        group_home.gone()
-        loader_home.visible()
+        binding.groupHome.gone()
+        binding.loaderHome.visible()
     }
 
     private fun setupError() {
-        loader_home.gone()
-        group_home.gone()
-        empty_state.visible()
-        try_again_button.setOnClickListener {
+        binding.loaderHome.gone()
+        binding.groupHome.gone()
+        binding.groupEmptyState.visible()
+        binding.emptyState.tryAgainButton.setOnClickListener {
             presenter.getEventsList()
         }
     }

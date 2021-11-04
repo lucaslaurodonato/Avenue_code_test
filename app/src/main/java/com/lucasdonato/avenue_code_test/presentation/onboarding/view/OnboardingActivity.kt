@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.lucasdonato.avenue_code_test.R
+import com.lucasdonato.avenue_code_test.databinding.ActivityOnboardingBinding
 import com.lucasdonato.avenue_code_test.mechanism.permission.AppPermissionUtils
 import com.lucasdonato.avenue_code_test.mechanism.permission.AppPermissionUtils.Companion.LOCATION_PERMISSION
 import com.lucasdonato.avenue_code_test.mechanism.permission.PermissionListener
 import com.lucasdonato.avenue_code_test.mechanism.permission.hasPermission
+import com.lucasdonato.avenue_code_test.presentation.base.view.BaseActivity
 import com.lucasdonato.avenue_code_test.presentation.onboarding.dialog.WelcomeChoiceDialog
 import com.lucasdonato.avenue_code_test.presentation.home.view.HomeActivity
 import com.lucasdonato.avenue_code_test.presentation.onboarding.presenter.OnboardingPresenter
@@ -16,7 +18,8 @@ import kotlinx.android.synthetic.main.activity_onboarding.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class OnboardingActivity : AppCompatActivity(), PermissionListener {
+class OnboardingActivity : BaseActivity<ActivityOnboardingBinding>(R.layout.activity_onboarding),
+    PermissionListener {
 
     companion object {
         fun getStartIntent(context: Context) = Intent(context, OnboardingActivity::class.java)
@@ -24,17 +27,16 @@ class OnboardingActivity : AppCompatActivity(), PermissionListener {
 
     private var homeDialog: WelcomeChoiceDialog? = null
     private val permissionUtils: AppPermissionUtils by inject { parametersOf(this, this) }
-    private val presenter: OnboardingPresenter by inject { parametersOf(this) }
+    private val presenter: OnboardingPresenter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_onboarding)
         setupClickListeners()
         setupBackground()
     }
 
     private fun setupBackground() {
-        background.background = presenter.getRandomBackground()
+        binding.background.background = presenter.getRandomBackground()
     }
 
     private fun startHomeScreen() {
@@ -43,7 +45,7 @@ class OnboardingActivity : AppCompatActivity(), PermissionListener {
     }
 
     private fun setupClickListeners() {
-        start_home_button.setOnClickListener {
+        binding.startHomeButton.setOnClickListener {
             if (hasPermission(this@OnboardingActivity, LOCATION_PERMISSION)) {
                 startHomeScreen()
             } else {
@@ -96,10 +98,7 @@ class OnboardingActivity : AppCompatActivity(), PermissionListener {
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         permissionUtils.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
