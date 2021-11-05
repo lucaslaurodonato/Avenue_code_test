@@ -7,36 +7,35 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.lucasdonato.avenue_code_test.R
+import com.lucasdonato.avenue_code_test.databinding.ActivityDetailsBinding
 import com.lucasdonato.avenue_code_test.mechanism.constants.EXTRA_RESULTS
 import com.lucasdonato.avenue_code_test.mechanism.extensions.*
 import com.lucasdonato.avenue_code_test.mechanism.livedata.Status
 import com.lucasdonato.avenue_code_test.mechanism.location.MapManager
-import com.lucasdonato.avenue_code_test.mechanism.permission.AppPermissionUtils
-import com.lucasdonato.avenue_code_test.mechanism.permission.hasPermission
+import com.lucasdonato.avenue_code_test.presentation.base.view.BaseActivity
 import com.lucasdonato.avenue_code_test.presentation.details.dialog.CheckInDialog
 import com.lucasdonato.avenue_code_test.presentation.details.presenter.DetailsPresenter
-import com.lucasdonato.avenue_code_test.presentation.onboarding.dialog.WelcomeChoiceDialog
 import kotlinx.android.synthetic.main.activity_details.*
-import kotlinx.android.synthetic.main.activity_details.success_check_in
+import kotlinx.android.synthetic.main.activity_details.view.*
 import kotlinx.android.synthetic.main.empty_state_mode.*
 import kotlinx.android.synthetic.main.include_card_details.*
+import kotlinx.android.synthetic.main.include_card_details.view.*
 import kotlinx.android.synthetic.main.include_toolbar.view.*
 import kotlinx.android.synthetic.main.success_check_in_layout.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
-import kotlin.io.print
 
-class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
+class DetailsActivity : BaseActivity<ActivityDetailsBinding>(R.layout.activity_details),
+    OnMapReadyCallback {
 
     companion object {
         fun getStartIntent(context: Context, id: Int?): Intent =
-            Intent(context, DetailsActivity::class.java).apply {
+            Intent(context, DetailsActivity::class.java).apply {41
                 putExtra(EXTRA_RESULTS, id)
             }
     }
@@ -50,7 +49,6 @@ class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
         receiveData()
         setupObserver()
         setupMaps()
@@ -102,7 +100,7 @@ class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun checkInButton() {
-        description_event_open_check_in.setOnClickListener {
+        binding.includeCardDetails.description_event_open_check_in.setOnClickListener {
             showCheckInDialog()
         }
     }
@@ -112,44 +110,45 @@ class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun clickListeners(title: String) {
-        include_toolbar.apply {
+        binding.includeToolbar.include_toolbar.apply {
             this.back.setOnClickListener { finish() }
             this.text_toolbar.text = title
         }
     }
 
-    private fun setupCheckInSuccess(){
-        success_check_in.visible()
+    private fun setupCheckInSuccess() {
+        binding.successCheckIn.visible()
         check_in_animation.addAnimatorListener(object :
             Animator.AnimatorListener {
             override fun onAnimationStart(animator: Animator) {}
             override fun onAnimationEnd(animator: Animator) {
-                loader_check_in.gone()
-                success_check_in.gone()
+                binding.loaderCheckIn.gone()
+                binding.successCheckIn.gone()
                 checkInDialog?.dismiss()
             }
+
             override fun onAnimationCancel(animator: Animator) {}
             override fun onAnimationRepeat(animator: Animator) {}
         })
     }
 
     private fun setupLoading(isCheckin: Boolean) {
-        if(isCheckin){
-            loader_check_in.visible()
+        if (isCheckin) {
+            binding.loaderCheckIn.visible()
             checkInDialog?.dismiss()
         } else {
-            loader_details.visible()
-            include_card_details.gone()
+            binding.loaderDetails.visible()
+            binding.includeCardDetails.gone()
         }
     }
 
     private fun setupError(isCheckin: Boolean) {
-        if(isCheckin){
-            loader_check_in.gone()
+        if (isCheckin) {
+            binding.loaderCheckIn.gone()
             toast(getString(R.string.error_in_check_in))
         } else {
-            loader_details.gone()
-            include_card_details.gone()
+            binding.loaderDetails.gone()
+            binding.includeCardDetails.gone()
             empty_state.visible()
             try_again_button.setOnClickListener {
                 presenter.getEventsList(id)
@@ -166,17 +165,17 @@ class DetailsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setupView(events: Events?) {
-        loader_details.gone()
+        binding.loaderDetails.gone()
+        binding.includeCardDetails.visible()
         empty_state.gone()
-        include_card_details.visible()
         events?.also {
             lat = it.latitude
             lng = it.longitude
             clickListeners(it.title)
-            price_event.text = convertToPrice(it.price)
-            description_event.text = it.description
-            date_event.text = convertLongToTime(it.date)
-            address_event.text = mapManager.getAddress(lat, lng)
+            binding.includeCardDetails.price_event.text = convertToPrice(it.price)
+            binding.includeCardDetails.description_event.text = it.description
+            binding.includeCardDetails.date_event.text = convertLongToTime(it.date)
+            binding.includeCardDetails.address_event.text = mapManager.getAddress(lat, lng)
             mapManager.showLocationOnMap(lat, lng)
         }
         description_event_open_maps.setOnClickListener {
