@@ -6,7 +6,6 @@ Application created just as android proficiency test.
 - [x] Events Details
 - [x] Check-in event
 - [x] Google Maps route
-- [ ] Testes in general
 
 
 Home Screen              |  Details Screen          | Check-in dialog         
