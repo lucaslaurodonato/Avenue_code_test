@@ -64,16 +64,17 @@ dependencies {
     implementation "com.google.android.gms:play-services-maps:$googleMaps"
     implementation "com.google.android.gms:play-services-location:$googleLocation"
 
-    // PermissionDispatcher
-    implementation "com.github.hotchemi:permissionsdispatcher:$permissionDispatcherVersion"
-
     // OkHttp, Retrofit and GSON
     implementation "com.squareup.okhttp3:okhttp:$okhttp"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp"
     implementation "com.google.code.gson:gson:$gson"
 
     // Koin for Android
-    implementation "org.koin:koin-android:$koin"
+    implementation "org.koin:koin-core:$koin"
+    implementation "org.koin:koin-android-viewmodel:$koin"
+
+    // Lifecycle ViewModel
+    implementation  "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleViewModel"
 
     // Glide (Image loader)
     implementation "com.github.bumptech.glide:glide:$glide"
@@ -101,9 +102,6 @@ dependencies {
     testImplementation "junit:junit:$jUnit"
     androidTestImplementation "androidx.test.ext:junit:$jUnitExt"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
-
-    // progress view
-    implementation "com.github.skydoves:progressview:$progressViewVersion"
 
     // Stetho
     implementation "com.facebook.stetho:stetho:$stethoVersion"

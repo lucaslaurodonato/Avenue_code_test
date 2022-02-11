@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lucasdonato.avenue_code_test">
+    package="com.lucasdonato.sicredi_bank_events">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name=".presentation.AppApplication"
+        android:name="com.lucasdonato.sicredi_bank_events.ui.AppApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,7 +18,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".presentation.splash.view.SplashActivity"
+            android:name="com.lucasdonato.sicredi_bank_events.ui.splash.view.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>
@@ -28,19 +28,19 @@
         </activity>
 
         <activity
-            android:name=".presentation.home.view.HomeActivity"
+            android:name="com.lucasdonato.sicredi_bank_events.ui.home.view.HomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".presentation.details.view.DetailsActivity"
+            android:name="com.lucasdonato.sicredi_bank_events.ui.details.view.EventDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Splash" />
 
         <activity
-            android:name=".presentation.onboarding.view.OnboardingActivity"
+            android:name="com.lucasdonato.sicredi_bank_events.ui.onboarding.view.OnboardingActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

@@ -1,224 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/shape_background_details"
-    app:cardCornerRadius="@dimen/default_margin">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:id="@+id/inc_card_details"
+        android:background="@drawable/shape_background_details"
+        app:cardCornerRadius="@dimen/default_margin">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/guide_line_default" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/guide_line_default" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/guide_line_default" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/date_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ultra_margin"
-            android:src="@drawable/ic_date"
-            app:layout_constraintEnd_toStartOf="@+id/description_event_day"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/guide_line_default" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/description_event_day"
-            style="@style/bold"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
-            android:text="@string/description_events_day"
-            android:textSize="@dimen/x_large_size"
-            app:layout_constraintBottom_toBottomOf="@+id/date_icon"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toEndOf="@+id/date_icon"
-            app:layout_constraintTop_toTopOf="@+id/date_icon" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/date_event"
-            style="@style/regular"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/minor_margin"
-            android:ellipsize="end"
-            android:textColor="@color/black"
-            android:textSize="@dimen/x_large_size"
-
-            app:layout_constraintEnd_toEndOf="@+id/description_event_day"
-            app:layout_constraintStart_toStartOf="@+id/description_event_day"
-            app:layout_constraintTop_toBottomOf="@+id/description_event_day"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:text="31/08/2021 - 15:00" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/map_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin"
-            android:src="@drawable/ic_maps"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@+id/date_event" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/description_event_address"
-            style="@style/bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
-            android:text="@string/description_events_address"
-            android:textSize="@dimen/x_large_size"
-            app:layout_constraintBottom_toBottomOf="@+id/map_icon"
-            app:layout_constraintEnd_toStartOf="@+id/description_event_open_maps"
-            app:layout_constraintStart_toEndOf="@+id/map_icon"
-            app:layout_constraintTop_toTopOf="@+id/map_icon" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/description_event_open_maps"
-            style="@style/regular"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
-            android:gravity="end"
-            android:text="@string/description_events_open_maps"
-            android:textColor="@color/red"
-            android:textSize="@dimen/x_large_size"
-            app:layout_constraintBottom_toBottomOf="@+id/description_event_address"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toEndOf="@+id/description_event_address"
-            app:layout_constraintTop_toTopOf="@+id/description_event_address" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/address_event"
-            style="@style/regular"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/x_large_size"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toStartOf="@+id/description_event_address"
-            app:layout_constraintTop_toBottomOf="@+id/description_event_address"
-            tools:text="Lorem ipsum lorem ipsum" />
-
-        <View
-            android:id="@+id/view_separation"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="1dp"
-            android:layout_margin="@dimen/default_margin"
-            android:background="@color/black_translucent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@+id/address_event" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/description_event_price"
-            style="@style/bold"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin"
-            android:text="@string/description_events_price"
-            android:textSize="@dimen/x_large_size"
-            app:layout_constraintStart_toEndOf="@+id/price_event"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@+id/view_separation" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/description_event_open_check_in"
-            style="@style/regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/description_check_in_button"
-            android:textColor="@color/red"
-            android:textSize="@dimen/x_large_size"
-            app:layout_constraintBottom_toBottomOf="@+id/price_event"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintTop_toTopOf="@+id/description_event_price" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/price_event"
-            style="@style/regular"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/minor_margin"
-            android:gravity="end"
-            android:textColor="@color/black"
-            android:textSize="@dimen/x_large_size"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@+id/description_event_price"
-            tools:text="R$20,00" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/description_event_title"
-            style="@style/bold"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:text="@string/description_events_details"
-            android:textSize="@dimen/x_large_size"
-            app:layout_constraintBottom_toTopOf="@+id/description_event"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@+id/price_event" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/description_event"
-            style="@style/regular"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:textSize="@dimen/x_large_size"
-            app:layout_constraintBottom_toTopOf="@+id/view_separation_maps"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@+id/description_event_title"
-            tools:text="Lorem ipsum lorem ipsum" />
-
-        <View
-            android:id="@+id/view_separation_maps"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="1dp"
-            android:layout_margin="@dimen/default_margin"
-            android:background="@color/black_translucent"
-            app:layout_constraintBottom_toTopOf="@+id/card_view_maps"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@+id/description_event" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_maps"
-            android:layout_width="@dimen/match_constraints"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_margin"
-            android:layout_marginBottom="@dimen/default_margin"
-            android:elevation="@dimen/default_margin"
-            app:cardCornerRadius="@dimen/default_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start"
-            app:layout_constraintTop_toBottomOf="@+id/view_separation_maps">
-
-            <fragment
-                android:id="@+id/details_maps"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/maps_details"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_date_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ultra_margin"
+                android:src="@drawable/ic_date"
+                app:layout_constraintEnd_toStartOf="@+id/tv_description_event_day"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_description_event_day"
+                style="@style/bold"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:text="@string/description_events_day"
+                android:textSize="@dimen/x_large_size"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_date_icon"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toEndOf="@+id/iv_date_icon"
+                app:layout_constraintTop_toTopOf="@+id/iv_date_icon" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_date_event"
+                style="@style/regular"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/minor_margin"
+                android:ellipsize="end"
+                android:textColor="@color/black"
+                android:textSize="@dimen/x_large_size"
+                app:layout_constraintEnd_toEndOf="@+id/tv_description_event_day"
+                app:layout_constraintStart_toStartOf="@+id/tv_description_event_day"
+                app:layout_constraintTop_toBottomOf="@+id/tv_description_event_day"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="31/08/2021 - 15:00" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_map_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:src="@drawable/ic_maps"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@+id/tv_date_event" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_description_event_address"
+                style="@style/bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:text="@string/description_events_address"
+                android:textSize="@dimen/x_large_size"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_map_icon"
+                app:layout_constraintEnd_toStartOf="@+id/tv_description_event_open_maps"
+                app:layout_constraintStart_toEndOf="@+id/iv_map_icon"
+                app:layout_constraintTop_toTopOf="@+id/iv_map_icon" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_description_event_open_maps"
+                style="@style/regular"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:gravity="end"
+                android:text="@string/description_events_open_maps"
+                android:textColor="@color/red"
+                android:textSize="@dimen/x_large_size"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_description_event_address"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toEndOf="@+id/tv_description_event_address"
+                app:layout_constraintTop_toTopOf="@+id/tv_description_event_address" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_address_event"
+                style="@style/regular"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/x_large_size"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/tv_description_event_address"
+                app:layout_constraintTop_toBottomOf="@+id/tv_description_event_address"
+                tools:text="Lorem ipsum lorem ipsum" />
+
+            <View
+                android:id="@+id/view_separation"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/default_margin"
+                android:background="@color/black_translucent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@+id/tv_address_event" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/description_event_price"
+                style="@style/bold"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:text="@string/description_events_price"
+                android:textSize="@dimen/x_large_size"
+                app:layout_constraintStart_toEndOf="@+id/tv_price_event"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@+id/view_separation" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_description_event_open_check_in"
+                style="@style/regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description_check_in_button"
+                android:textColor="@color/red"
+                android:textSize="@dimen/x_large_size"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_price_event"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintTop_toTopOf="@+id/description_event_price" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_price_event"
+                style="@style/regular"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/minor_margin"
+                android:gravity="end"
+                android:textColor="@color/black"
+                android:textSize="@dimen/x_large_size"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@+id/description_event_price"
+                tools:text="R$20,00" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_description_event_title"
+                style="@style/bold"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="@string/description_events_details"
+                android:textSize="@dimen/x_large_size"
+                app:layout_constraintBottom_toTopOf="@+id/tv_description_event"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@+id/tv_price_event" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_description_event"
+                style="@style/regular"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:textSize="@dimen/x_large_size"
+                app:layout_constraintBottom_toTopOf="@+id/view_separation_maps"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@+id/tv_description_event_title"
+                tools:text="Lorem ipsum lorem ipsum" />
+
+            <View
+                android:id="@+id/view_separation_maps"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/default_margin"
+                android:background="@color/black_translucent"
+                app:layout_constraintBottom_toTopOf="@+id/cv_maps"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@+id/tv_description_event" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_maps"
+                android:layout_width="@dimen/match_constraints"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginBottom="@dimen/default_margin"
+                android:elevation="@dimen/default_margin"
+                app:cardCornerRadius="@dimen/default_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@+id/view_separation_maps">
+
+                <fragment
+                    android:id="@+id/fm_details_maps"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/maps_details"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

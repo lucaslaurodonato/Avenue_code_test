@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black">
+        android:background="@color/white">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_start"
@@ -20,7 +20,7 @@
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
             android:scaleType="fitCenter"
-            android:src="@drawable/avenue_logo"
+            android:src="@drawable/logo_sicredi"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline_start"
             app:lottie_autoPlay="true"
-            app:lottie_rawRes="@raw/loading_splash"
+            app:lottie_rawRes="@raw/loader_splash"
             app:lottie_repeatCount="10"
             app:lottie_repeatMode="reverse" />
 

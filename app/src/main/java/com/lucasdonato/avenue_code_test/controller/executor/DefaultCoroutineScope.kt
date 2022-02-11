@@ -1,6 +1,6 @@
 package com.lucasdonato.avenue_code_test.controller.executor
 
-import com.lucasdonato.avenue_code_test.data.repository.ErrorException
+import com.lucasdonato.sicredi_bank_events.data.repository.ErrorException
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
