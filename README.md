@@ -9,7 +9,7 @@ Application created just as android proficiency test.
 
 <ul>
   <li><a href="https://developer.android.com/kotlin?hl=pt" rel="nofollow"> Kotlin :heart: </a></li>
-  <li><a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter" rel="nofollow">Architecture MVP</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter" rel="nofollow">Architecture MVVM</a></li>
   <li><a href="https://insert-koin.io/" rel="nofollow">Dependency injection - Koin</a></li>
 <li><a href="https://developer.android.com/kotlin/coroutines?gclid=CjwKCAjwgviIBhBkEiwA10D2jzPWvJShY_Pk__NZI33OAPPtNDr9SCn3XdkRj5SGTVYe-bCv9P8NHhoCR7oQAvD_BwE&gclsrc=aw.ds" rel="nofollow"> Kotlin Coroutines</a></li>
   <li><a href="https://lottiefiles.com/" rel="nofollow">Lottie :stuck_out_tongue:</a></li>
