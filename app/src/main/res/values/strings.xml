@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Avenue code Eventos</string>
+    <string name="app_name">Sicredi Eventos</string>
     <string name="ops_error">Algo deu errado na sua solicitação</string>
     <string name="over_rate_limit">Você excedeu seu limite de taxa. Tente mais tarde.</string>
     <string name="error_generic">Ocorreu um problema, tente novamente.</string>

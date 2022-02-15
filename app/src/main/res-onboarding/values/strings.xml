@@ -1,11 +1,11 @@
 <resources>
 
-    <string name="welcome_title">Avenue code Eventos App</string>
-    <string name="welcome_message">Esse projeto foi desenvolvido como teste técnico da empresa Avenue code, obrigado por poder participar do processo seletivo!</string>
+    <string name="welcome_title">Sicredi Eventos App!</string>
+    <string name="welcome_message">Projeto criado utilizando a api de eventos.</string>
     <string name="button_start_home">Começar</string>
 
     <string name="location_permission_title">Permitir localização</string>
-    <string name="location_permission_message">Sua localização é utilizada para mostrar no mapa os proximos eventos.\n\nPara prosseguir habilite o acesso clicando em permitir.</string>
+    <string name="location_permission_message">Sua localização é utilizada para mostrar no <b>mapa</b> o local dos eventos.\n\nPara prosseguir habilite o acesso clicando em permitir.</string>
     <string name="allow">Permitir</string>
     <string name="not_allow">Não permitir</string>
 
