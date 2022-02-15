@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.lucasdonato.avenue_code_test"
+        applicationId "com.lucasdonato.sicredi_events"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
