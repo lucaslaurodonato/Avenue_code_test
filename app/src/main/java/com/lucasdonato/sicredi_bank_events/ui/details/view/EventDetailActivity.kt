@@ -29,8 +29,6 @@ import org.koin.core.parameter.parametersOf
 class EventDetailActivity : BaseActivity<ActivityDetailsBinding>(R.layout.activity_details),
     OnMapReadyCallback {
 
-    ///TODO FAZER BOTÃO PARA COMPARTILHAR EVENTO
-
     companion object {
         fun getStartIntent(context: Context, id: Int?): Intent =
             Intent(context, EventDetailActivity::class.java).apply {
@@ -158,21 +156,37 @@ class EventDetailActivity : BaseActivity<ActivityDetailsBinding>(R.layout.activi
             binding.incCardDetails.tvDateEvent.text = convertLongToTime(it.date)
             binding.incCardDetails.tvAddressEvent.text = mapManager.getAddress(lat, lng)
             mapManager.showLocationOnMap(lat, lng)
+            setupShareEvent(
+                getString(
+                    R.string.shared_text,
+                    it.title,
+                    mapManager.getAddress(lat, lng),
+                    convertLongToTime(it.date)
+                )
+            )
         }
-        createMapIntent()
+        createIntentToGoogleMaps()
     }
 
-    private fun createMapIntent() {
-        binding.incCardDetails.tvDescriptionEventOpenMaps.setOnClickListener {
-            createIntentToGoogleMaps()
+    private fun setupShareEvent(details: String) {
+        binding.incToolbar.ivShare.setOnClickListener {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, details)
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(sendIntent, getString(R.string.shared_text))
+            startActivity(shareIntent)
         }
     }
 
     private fun createIntentToGoogleMaps() {
-        val uri = Uri.parse("$URI_INTENT$lat,$lng")
-        Intent(Intent.ACTION_VIEW, uri).apply {
-            this.setPackage(URI_MAPS)
-            startActivity(this)
+        binding.incCardDetails.tvDescriptionEventOpenMaps.setOnClickListener {
+            val uri = Uri.parse("$URI_INTENT$lat,$lng")
+            Intent(Intent.ACTION_VIEW, uri).apply {
+                this.setPackage(URI_MAPS)
+                startActivity(this)
+            }
         }
     }
 

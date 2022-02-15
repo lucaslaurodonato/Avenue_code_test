@@ -20,4 +20,6 @@
     <string name="success_in_check_in">Seu check-in foi realizado com sucesso</string>
     <string name="error_in_check_in">Erro ao realizar o check-in</string>
 
+    <string name="shared_text">Eai bora? \nSegue os dados do evento \nNome: %s \nEndereço: %s \nData: %s</string>
+
 </resources>
