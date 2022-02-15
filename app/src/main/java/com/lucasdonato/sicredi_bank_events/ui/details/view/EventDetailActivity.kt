@@ -122,8 +122,8 @@ class EventDetailActivity : BaseActivity<ActivityDetailsBinding>(R.layout.activi
             binding.incLoaderCheckIn.visible()
             checkInDialog?.dismiss()
         } else {
-            binding.incLoaderDetails.visible()
             binding.incCardDetails.incCardDetails.gone()
+            binding.incLoaderDetails.visible()
         }
     }
 
@@ -143,8 +143,8 @@ class EventDetailActivity : BaseActivity<ActivityDetailsBinding>(R.layout.activi
 
     private fun successCase() {
         binding.incLoaderDetails.gone()
-        binding.incCardDetails.incCardDetails.visible()
         binding.incEmptyState.emptyState.gone()
+        binding.incCardDetails.incCardDetails.visible()
     }
 
     private fun setupView(events: Events?) {
