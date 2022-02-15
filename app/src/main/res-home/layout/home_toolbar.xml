@@ -5,11 +5,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:alpha="0.9"
         android:background="@drawable/shape_toolbar_home">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/close_home"
+            android:id="@+id/iv_icon_sicredi"
+            android:layout_width="@dimen/icon_dialog"
+            android:layout_height="@dimen/icon_dialog"
+            android:layout_margin="@dimen/default_margin"
+            android:src="@drawable/sicredi_icon"
+            android:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_close_home"
             android:layout_width="@dimen/icon_default"
             android:layout_height="@dimen/icon_default"
             android:layout_margin="@dimen/default_margin"

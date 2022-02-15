@@ -2,14 +2,14 @@ package com.lucasdonato.sicredi_bank_events.di
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
-import com.lucasdonato.sicredi_bank_events.data.remote.WebServiceClient
-import com.lucasdonato.sicredi_bank_events.data.remote.dataSource.EventsDataSource
-import com.lucasdonato.sicredi_bank_events.data.repository.events.EventsRepository
-import com.lucasdonato.sicredi_bank_events.data.useCase.EventsUseCase
-import com.lucasdonato.sicredi_bank_events.mechanism.location.LocationUtils
-import com.lucasdonato.sicredi_bank_events.mechanism.location.MapManager
-import com.lucasdonato.sicredi_bank_events.mechanism.permission.AppPermissionUtils
-import com.lucasdonato.sicredi_bank_events.mechanism.permission.PermissionListener
+import com.lucasdonato.sicredi_bank_events.model.data.remote.WebServiceClient
+import com.lucasdonato.sicredi_bank_events.model.data.dataSource.EventsDataSource
+import com.lucasdonato.sicredi_bank_events.model.data.repository.EventsRepository
+import com.lucasdonato.sicredi_bank_events.model.data.useCase.EventsUseCase
+import com.lucasdonato.sicredi_bank_events.utils.location.LocationUtils
+import com.lucasdonato.sicredi_bank_events.utils.location.MapManager
+import com.lucasdonato.sicredi_bank_events.utils.permission.AppPermissionUtils
+import com.lucasdonato.sicredi_bank_events.utils.permission.PermissionListener
 import com.lucasdonato.sicredi_bank_events.ui.details.viewModel.EventDetailViewModel
 import com.lucasdonato.sicredi_bank_events.ui.home.viewmodel.HomeViewModel
 import com.lucasdonato.sicredi_bank_events.ui.onboarding.viewModel.OnboardingViewModel

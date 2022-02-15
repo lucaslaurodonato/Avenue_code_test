@@ -41,9 +41,6 @@ ext {
     googleMaps = "17.0.0"
     googleLocation = "17.0.0"
 
-    // Lifecycle ViewModel
-    lifecycleViewModel = "2.4.0"
-
     // PermissionDispatcher
     permissionDispatcherVersion = "3.3.1"
 
@@ -68,8 +65,6 @@ ext {
     // Debug
     stethoVersion = "1.5.1"
 
-    // progress view
-    progressViewVersion = '1.1.1'
 }
 
 task clean(type: Delete) {

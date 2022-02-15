@@ -1,11 +1,11 @@
 package com.lucasdonato.sicredi_bank_events.ui.details.viewModel
 
-import CheckIn
-import Events
-import com.lucasdonato.avenue_code_test.presentation.base.presenter.BaseViewModel
-import com.lucasdonato.sicredi_bank_events.data.useCase.EventsUseCase
-import com.lucasdonato.sicredi_bank_events.mechanism.livedata.MutableLiveDataResource
-import com.lucasdonato.sicredi_bank_events.mechanism.livedata.Resource
+import com.lucasdonato.sicredi_bank_events.model.data.model.entities.details.CheckIn
+import com.lucasdonato.sicredi_bank_events.model.data.model.entities.home.Events
+import com.lucasdonato.sicredi_bank_events.ui.base.viewmodel.BaseViewModel
+import com.lucasdonato.sicredi_bank_events.model.data.useCase.EventsUseCase
+import com.lucasdonato.sicredi_bank_events.utils.livedata.MutableLiveDataResource
+import com.lucasdonato.sicredi_bank_events.utils.livedata.Resource
 import com.lucasdonato.sicredi_bank_events.ui.AppApplication
 
 class EventDetailViewModel(

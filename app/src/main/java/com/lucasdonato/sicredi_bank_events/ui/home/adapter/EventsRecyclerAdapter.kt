@@ -1,13 +1,13 @@
 package com.lucasdonato.sicredi_bank_events.ui.home.adapter
 
-import Events
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lucasdonato.sicredi_bank_events.R
 import com.lucasdonato.sicredi_bank_events.databinding.CardHomeRecyclerViewBinding
-import com.lucasdonato.sicredi_bank_events.mechanism.utils.Utils
+import com.lucasdonato.sicredi_bank_events.model.data.model.entities.home.Events
+import com.lucasdonato.sicredi_bank_events.utils.utils.Utils
 import com.lucasdonato.sicredi_bank_events.ui.base.adapter.BaseRecyclerAdapter
 
 class EventsRecyclerAdapter : BaseRecyclerAdapter<Events, EventsRecyclerAdapter.ViewHolder>() {

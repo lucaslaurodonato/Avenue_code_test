@@ -5,7 +5,10 @@ import android.content.Context
 import android.os.Bundle
 import android.view.Gravity
 import android.view.WindowManager
+import android.widget.Button
+import android.widget.TextView
 import com.lucasdonato.sicredi_bank_events.R
+import kotlinx.android.synthetic.main.card_home_recycler_view.*
 import kotlinx.android.synthetic.main.welcome_choice_dialog.*
 
 class WelcomeChoiceDialog(
@@ -13,26 +16,27 @@ class WelcomeChoiceDialog(
     private val listener: DialogListener
 ) : Dialog(context) {
 
+    private lateinit var positiveButton: Button
+    private lateinit var negativeButton: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.welcome_choice_dialog)
 
-        positive_button.apply {
-            setOnClickListener {
-                listener.onPositiveClickListener()
-            }
+        positiveButton = findViewById(R.id.bt_positive)
+        negativeButton = findViewById(R.id.bt_negative)
+
+        positiveButton.setOnClickListener {
+            listener.onPositiveClickListener()
         }
 
-        negative_button.apply {
-            setOnClickListener {
-                listener.onNegativeClickListener()
-            }
+        negativeButton.setOnClickListener {
+            listener.onNegativeClickListener()
         }
 
         val lp = WindowManager.LayoutParams()
 
         lp.apply {
-
             this@WelcomeChoiceDialog.window?.let {
                 copyFrom(it.attributes)
             }
@@ -45,7 +49,6 @@ class WelcomeChoiceDialog(
             it.setBackgroundDrawableResource(android.R.color.transparent)
             it.attributes = lp
         }
-
     }
 
     interface DialogListener {

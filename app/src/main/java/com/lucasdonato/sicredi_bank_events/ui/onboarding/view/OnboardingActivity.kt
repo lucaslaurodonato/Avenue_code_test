@@ -5,10 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import com.lucasdonato.sicredi_bank_events.R
 import com.lucasdonato.sicredi_bank_events.databinding.ActivityOnboardingBinding
-import com.lucasdonato.sicredi_bank_events.mechanism.permission.AppPermissionUtils
-import com.lucasdonato.sicredi_bank_events.mechanism.permission.AppPermissionUtils.Companion.LOCATION_PERMISSION
-import com.lucasdonato.sicredi_bank_events.mechanism.permission.PermissionListener
-import com.lucasdonato.sicredi_bank_events.mechanism.permission.hasPermission
+import com.lucasdonato.sicredi_bank_events.utils.permission.AppPermissionUtils
+import com.lucasdonato.sicredi_bank_events.utils.permission.AppPermissionUtils.Companion.LOCATION_PERMISSION
+import com.lucasdonato.sicredi_bank_events.utils.permission.PermissionListener
+import com.lucasdonato.sicredi_bank_events.utils.permission.hasPermission
 import com.lucasdonato.sicredi_bank_events.ui.base.view.BaseActivity
 import com.lucasdonato.sicredi_bank_events.ui.onboarding.dialog.WelcomeChoiceDialog
 import com.lucasdonato.sicredi_bank_events.ui.home.view.HomeActivity
@@ -36,7 +36,7 @@ class OnboardingActivity : BaseActivity<ActivityOnboardingBinding>(R.layout.acti
     }
 
     private fun setupBackground() {
-        binding.background.background = viewModel.getRandomBackground()
+        binding.ivBackground.background = viewModel.getRandomBackground()
     }
 
     private fun startHomeScreen() {

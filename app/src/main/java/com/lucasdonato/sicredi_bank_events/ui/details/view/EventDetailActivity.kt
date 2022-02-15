@@ -1,7 +1,6 @@
 package com.lucasdonato.sicredi_bank_events.ui.details.view
 
-import CheckIn
-import Events
+import com.lucasdonato.sicredi_bank_events.model.data.model.entities.details.CheckIn
 import android.animation.Animator
 import android.content.Context
 import android.content.Intent
@@ -13,26 +12,24 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.lucasdonato.sicredi_bank_events.R
 import com.lucasdonato.sicredi_bank_events.databinding.ActivityDetailsBinding
-import com.lucasdonato.sicredi_bank_events.mechanism.constants.EXTRA_RESULTS
-import com.lucasdonato.sicredi_bank_events.mechanism.extensions.*
-import com.lucasdonato.sicredi_bank_events.mechanism.livedata.Status
-import com.lucasdonato.sicredi_bank_events.mechanism.location.MapManager
+import com.lucasdonato.sicredi_bank_events.model.data.model.entities.home.Events
+import com.lucasdonato.sicredi_bank_events.utils.constants.EXTRA_RESULTS
+import com.lucasdonato.sicredi_bank_events.utils.livedata.Status
+import com.lucasdonato.sicredi_bank_events.utils.location.MapManager
 import com.lucasdonato.sicredi_bank_events.ui.base.view.BaseActivity
 import com.lucasdonato.sicredi_bank_events.ui.details.dialog.CheckInDialog
 import com.lucasdonato.sicredi_bank_events.ui.details.viewModel.EventDetailViewModel
-import kotlinx.android.synthetic.main.activity_details.*
-import kotlinx.android.synthetic.main.activity_details.view.*
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.empty_state_mode.*
-import kotlinx.android.synthetic.main.include_card_details.*
-import kotlinx.android.synthetic.main.include_card_details.view.*
-import kotlinx.android.synthetic.main.include_toolbar.view.*
-import kotlinx.android.synthetic.main.success_check_in_layout.*
+import com.lucasdonato.sicredi_bank_events.utils.constants.URI_INTENT
+import com.lucasdonato.sicredi_bank_events.utils.constants.URI_MAPS
+import com.lucasdonato.sicredi_bank_events.utils.extensions.*
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class EventDetailActivity : BaseActivity<ActivityDetailsBinding>(R.layout.activity_details),
     OnMapReadyCallback {
+
+    ///TODO FAZER BOTÃO PARA COMPARTILHAR EVENTO
 
     companion object {
         fun getStartIntent(context: Context, id: Int?): Intent =
@@ -41,7 +38,7 @@ class EventDetailActivity : BaseActivity<ActivityDetailsBinding>(R.layout.activi
             }
     }
 
-    private val viewModel: EventDetailViewModel by inject()
+    private val viewModel: EventDetailViewModel by viewModel()
     private val mapManager: MapManager by inject { parametersOf(this) }
     private var checkInDialog: CheckInDialog? = null
     private var id: Int = 0
@@ -62,28 +59,121 @@ class EventDetailActivity : BaseActivity<ActivityDetailsBinding>(R.layout.activi
         mapFragment.getMapAsync(this)
     }
 
-    private fun receiveData() {
-        intent?.getIntExtra(EXTRA_RESULTS, 0)?.let {
-            id = it
-            viewModel.getEventById(id)
+    private fun setupToolbar(title: String) {
+        binding.incToolbar.apply {
+            this.ivBack.setOnClickListener { finish() }
+            this.tvTextToolbar.text = title
         }
     }
 
+    private fun receiveData() {
+        intent?.getIntExtra(EXTRA_RESULTS, 0)?.let { id = it }
+        callEventById()
+    }
+
+    private fun callEventById() {
+        viewModel.getEventById(id)
+    }
+
     private fun setupObserver() {
-        viewModel.getEvent.observe(this, Observer {
-            when (it.status) {
+        viewModel.getEvent.observe(this, Observer { eventById ->
+            when (eventById.status) {
                 Status.LOADING -> setupLoading(false)
-                Status.SUCCESS -> it.data?.let { setupView(it) }
+                Status.SUCCESS -> eventById.data?.let { setupView(it) }
                 Status.ERROR -> setupError(false)
             }
         })
-        viewModel.checkIn.observe(this, Observer {
-            when (it.status) {
+        viewModel.checkIn.observe(this, Observer { checkIn ->
+            when (checkIn.status) {
                 Status.LOADING -> setupLoading(true)
                 Status.SUCCESS -> setupCheckInSuccess()
                 Status.ERROR -> setupError(true)
             }
         })
+    }
+
+    private fun checkInButton() {
+        binding.incCardDetails.tvDescriptionEventOpenCheckIn.setOnClickListener {
+            showCheckInDialog()
+        }
+    }
+
+    private fun successCaseCheckIn() {
+        binding.incLoaderCheckIn.gone()
+        binding.incSuccessCheckIn.incLoadingBackground.visible()
+    }
+
+    private fun setupCheckInSuccess() {
+        successCaseCheckIn()
+        binding.incSuccessCheckIn.ltvCheckInAnimation.addAnimatorListener(object :
+            Animator.AnimatorListener {
+            override fun onAnimationCancel(animator: Animator) {}
+            override fun onAnimationRepeat(animator: Animator) {}
+            override fun onAnimationStart(animator: Animator) {}
+            override fun onAnimationEnd(animator: Animator) {
+                binding.incSuccessCheckIn.incLoadingBackground.gone()
+                checkInDialog?.dismiss()
+            }
+        })
+    }
+
+    private fun setupLoading(isCheckIn: Boolean) {
+        if (isCheckIn) {
+            binding.incLoaderCheckIn.visible()
+            checkInDialog?.dismiss()
+        } else {
+            binding.incLoaderDetails.visible()
+            binding.incCardDetails.incCardDetails.gone()
+        }
+    }
+
+    private fun setupError(isCheckIn: Boolean) {
+        if (isCheckIn) {
+            binding.incLoaderCheckIn.gone()
+            toast(getString(R.string.error_in_check_in))
+        } else {
+            binding.incLoaderDetails.gone()
+            binding.incCardDetails.incCardDetails.gone()
+            binding.incEmptyState.emptyState.visible()
+            binding.incEmptyState.btTryAgain.setOnClickListener {
+                viewModel.getEventById(id)
+            }
+        }
+    }
+
+    private fun successCase() {
+        binding.incLoaderDetails.gone()
+        binding.incCardDetails.incCardDetails.visible()
+        binding.incEmptyState.emptyState.gone()
+    }
+
+    private fun setupView(events: Events?) {
+        successCase()
+        events?.also {
+            setupToolbar(it.title)
+            lat = it.latitude
+            lng = it.longitude
+            binding.incCardDetails.tvPriceEvent.text = convertToPrice(it.price)
+            binding.incCardDetails.tvDescriptionEvent.text = it.description
+            binding.incCardDetails.tvDateEvent.text = convertLongToTime(it.date)
+            binding.incCardDetails.tvAddressEvent.text = mapManager.getAddress(lat, lng)
+            mapManager.showLocationOnMap(lat, lng)
+        }
+        createMapIntent()
+    }
+
+    private fun createMapIntent() {
+        binding.incCardDetails.tvDescriptionEventOpenMaps.setOnClickListener {
+            createIntentToGoogleMaps()
+        }
+    }
+
+    private fun createIntentToGoogleMaps() {
+        val uri = Uri.parse("$URI_INTENT$lat,$lng")
+        Intent(Intent.ACTION_VIEW, uri).apply {
+            this.setPackage(URI_MAPS)
+            startActivity(this)
+        }
     }
 
     private fun showCheckInDialog() {
@@ -98,90 +188,8 @@ class EventDetailActivity : BaseActivity<ActivityDetailsBinding>(R.layout.activi
         }
     }
 
-    private fun checkInButton() {
-        binding.incCardDetails.tvDescriptionEventOpenCheckIn.setOnClickListener {
-            showCheckInDialog()
-        }
-    }
-
     override fun onMapReady(map: GoogleMap?) {
         mapManager.onMapReady(map)
-    }
-
-    private fun setupToolbar(title: String) {
-        binding.incToolbar.apply {
-            this.ivBack.setOnClickListener { finish() }
-            this.tvTextToolbar.text = title
-        }
-    }
-
-    private fun setupCheckInSuccess() {
-        binding.incSuccessCheckIn.incLoadingBackground.visible()
-        binding.incSuccessCheckIn.ltvCheckInAnimation.addAnimatorListener(object :
-            Animator.AnimatorListener {
-            override fun onAnimationStart(animator: Animator) {}
-            override fun onAnimationEnd(animator: Animator) {
-                binding.incLoaderDetails.gone()
-                binding.incSuccessCheckIn.incLoadingBackground.gone()
-                checkInDialog?.dismiss()
-            }
-
-            override fun onAnimationCancel(animator: Animator) {}
-            override fun onAnimationRepeat(animator: Animator) {}
-        })
-    }
-
-    private fun setupLoading(isCheckin: Boolean) {
-        if (isCheckin) {
-            binding.incLoaderCheckIn.visible()
-            checkInDialog?.dismiss()
-        } else {
-            binding.incLoaderDetails.visible()
-            binding.incCardDetails.incCardDetails.gone()
-        }
-    }
-
-    private fun setupError(isCheckin: Boolean) {
-        if (isCheckin) {
-            binding.incLoaderCheckIn.gone()
-            toast(getString(R.string.error_in_check_in))
-        } else {
-            binding.incLoaderDetails.gone()
-            binding.incCardDetails.incCardDetails.gone()
-            binding.incEmptyState.incEmptyState.visible()
-            binding.incEmptyState.btTryAgain.setOnClickListener {
-                viewModel.getEventById(id)
-            }
-        }
-    }
-
-    private fun setupView(events: Events?) {
-        binding.incLoaderDetails.gone()
-        binding.incCardDetails.incCardDetails.visible()
-        binding.incEmptyState.incEmptyState.gone()
-
-        events?.also {
-            lat = it.latitude
-            lng = it.longitude
-            setupToolbar(it.title)
-            binding.incCardDetails.tvPriceEvent.text = convertToPrice(it.price)
-            binding.incCardDetails.tvDescriptionEvent.text = it.description
-            binding.incCardDetails.tvDateEvent.text = convertLongToTime(it.date)
-            binding.incCardDetails.tvAddressEvent.text = mapManager.getAddress(lat, lng)
-            mapManager.showLocationOnMap(lat, lng)
-        }
-        binding.incCardDetails.tvDescriptionEventOpenMaps.setOnClickListener {
-            createIntentToGoogleMaps()
-        }
-    }
-
-    ///TODO: REVIEW THIS METHOD
-    private fun createIntentToGoogleMaps() {
-        val uri = Uri.parse("google.navigation:q=$lat,$lng")
-        Intent(Intent.ACTION_VIEW, uri).apply {
-            this.setPackage("com.google.android.apps.maps")
-            startActivity(this)
-        }
     }
 
 }
