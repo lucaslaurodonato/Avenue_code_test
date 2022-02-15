@@ -7,17 +7,6 @@ Application created just as android proficiency test.
 - [x] Check-in event
 - [x] Google Maps route
 
-
-Home Screen              |  Details Screen          | Check-in dialog         
-:-------------------------:|:-------------------------:|:-------------------------:
-![](https://user-images.githubusercontent.com/47648982/131671202-5ae68dc8-bdc8-47fa-8cc3-d6f8ee70e008.png)  |  ![](https://user-images.githubusercontent.com/47648982/131671506-d65c8e21-df8f-4dc3-a833-2bb09c2b227d.png) | ![](https://user-images.githubusercontent.com/47648982/131671528-d1822599-4def-4b60-be43-e3ddb472321a.png)
-
-<img src="https://user-images.githubusercontent.com/47648982/131674404-01a0a7e0-66cd-4d44-8059-b1424cc80615.png" width="70%" style="max-width:100%;"/>
-
-<img src="https://user-images.githubusercontent.com/47648982/131674926-a6ed4aa6-5416-488a-af6b-427132bf9269.png" width="70%" style="max-width:100%;"/>
-
-<h1>:rocket: Technologies</h1>  
-
 <ul>
   <li><a href="https://developer.android.com/kotlin?hl=pt" rel="nofollow"> Kotlin :heart: </a></li>
   <li><a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter" rel="nofollow">Architecture MVP</a></li>
