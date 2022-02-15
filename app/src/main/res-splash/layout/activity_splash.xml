@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black">
+        android:background="@color/white">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_start"
@@ -16,11 +16,11 @@
             app:layout_constraintGuide_end="@dimen/splash_size" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/background_splash"
+            android:id="@+id/iv_background"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
             android:scaleType="fitCenter"
-            android:src="@drawable/avenue_logo"
+            android:src="@drawable/logo_sicredi"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/splash_animation_II"
+            android:id="@+id/ltv_splash"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,7 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline_start"
             app:lottie_autoPlay="true"
-            app:lottie_rawRes="@raw/loading_splash"
+            app:lottie_rawRes="@raw/loader_splash"
             app:lottie_repeatCount="10"
             app:lottie_repeatMode="reverse" />
 

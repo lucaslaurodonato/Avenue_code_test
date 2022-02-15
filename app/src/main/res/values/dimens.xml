@@ -27,7 +27,7 @@
     <dimen name="separation_view_small">1dp</dimen>
 
     <!--  TEXT SIZE  -->
-    <dimen name="x_splash_size">46sp</dimen>
+    <dimen name="x_onboarding_size">36sp</dimen>
     <dimen name="x_title_size">18sp</dimen>
     <dimen name="x_large_size">16sp</dimen>
     <dimen name="x_small_size">14sp</dimen>
@@ -35,8 +35,11 @@
     <dimen name="x_very_small_size">7sp</dimen>
 
      <!--Icon size-->
-    <dimen name="icon_default">24dp</dimen>
+    <dimen name="icon_default">32dp</dimen>
     <dimen name="icon_dialog">56dp</dimen>
+
+    <!--Onboarding-->
+    <dimen name="logo_onboarding">300dp</dimen>
 
     <!--Home-->
     <dimen name="card_recycler">200dp</dimen>

@@ -5,11 +5,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:background="@color/sicredi_color"
         android:fillViewport="true">
 
         <include
-            android:id="@+id/include_toolbar"
+            android:id="@+id/inc_toolbar"
             layout="@layout/include_toolbar"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="wrap_content"
@@ -18,18 +18,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/include_card_details"
+            android:id="@+id/inc_card_details"
             layout="@layout/include_card_details"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
-            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include_toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/inc_toolbar" />
 
         <include
-            android:id="@+id/loader_details"
+            android:id="@+id/inc_loader_details"
             layout="@layout/loader_layout_details"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
@@ -37,10 +36,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include_toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/inc_toolbar" />
 
         <include
-            android:id="@+id/loader_check_in"
+            android:id="@+id/inc_loader_check_in"
             layout="@layout/loader_layout"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
@@ -51,7 +50,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/success_check_in"
+            android:id="@+id/inc_success_check_in"
             layout="@layout/success_check_in_layout"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
@@ -62,7 +61,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/empty_state"
+            android:id="@+id/inc_empty_state"
             layout="@layout/empty_state_mode"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"

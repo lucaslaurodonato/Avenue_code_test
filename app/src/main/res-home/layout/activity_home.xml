@@ -13,17 +13,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            app:constraint_referenced_ids="home_map,toolbar,home_recycler_events" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_empty_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="empty_state" />
+            app:constraint_referenced_ids="fragment_home_map,inc_toolbar,inc_home_recycler_events" />
 
         <fragment
-            android:id="@+id/home_map"
+            android:id="@+id/fragment_home_map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
@@ -33,7 +26,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/toolbar"
+            android:id="@+id/inc_toolbar"
             layout="@layout/home_toolbar"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/toolbar_default_size"
@@ -42,7 +35,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/home_recycler_events"
+            android:id="@+id/inc_home_recycler_events"
             layout="@layout/home_content"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="wrap_content"
@@ -51,7 +44,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <include
-            android:id="@+id/loader_home"
+            android:id="@+id/inc_loader_home"
             layout="@layout/loader_layout_home"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
@@ -62,10 +55,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/empty_state"
+            android:id="@+id/inc_empty_state"
             layout="@layout/empty_state_mode"
             android:layout_width="@dimen/match_constraints"
             android:layout_height="@dimen/match_constraints"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

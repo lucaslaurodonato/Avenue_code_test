@@ -9,6 +9,8 @@
     <color name="white">#FFFFFF</color>
     <color name="white_translucent">#CCFFFFFF</color>
     <color name="black">#000000</color>
+    <color name="sicredi_color">#58BA52</color>
+    <color name="sicredi_color_translucent">#8058BA52</color>
     <color name="black_translucent">#80000000</color>
     <color name="black_80">#CC000000</color>
     <color name="red">#fb0505</color>
