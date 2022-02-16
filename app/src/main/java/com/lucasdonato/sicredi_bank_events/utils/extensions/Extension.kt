@@ -1,6 +1,7 @@
 package com.lucasdonato.sicredi_bank_events.utils.extensions
 
 import android.app.Activity
+import android.util.Patterns
 import android.view.View
 import android.view.View.*
 import android.widget.EditText
@@ -8,6 +9,7 @@ import android.widget.Toast
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 
 fun convertLongToTime(time: Long): String {
     val date = Date(time)
@@ -39,6 +41,11 @@ fun View.invisible() {
 fun Activity.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
 fun View.toast(message: String) = Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+
+fun confirmIfEmailIsValid(email: String): Boolean {
+    val pattern: Pattern = Patterns.EMAIL_ADDRESS
+    return pattern.matcher(email).matches().not()
+}
 
 
 

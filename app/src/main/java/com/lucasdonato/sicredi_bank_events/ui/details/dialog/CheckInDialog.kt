@@ -8,6 +8,7 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import com.lucasdonato.sicredi_bank_events.R
+import com.lucasdonato.sicredi_bank_events.utils.extensions.confirmIfEmailIsValid
 import com.lucasdonato.sicredi_bank_events.utils.extensions.get
 import com.lucasdonato.sicredi_bank_events.utils.extensions.validate
 
@@ -29,6 +30,7 @@ class CheckInDialog(context: Context, private val listener: DialogListener) : Di
             setOnClickListener {
                 val name = etName.validate()
                 val email = etEmail.validate()
+                val validEmail = confirmIfEmailIsValid(etEmail.get())
 
                 etName.error = null
                 etEmail.error = null
@@ -36,6 +38,7 @@ class CheckInDialog(context: Context, private val listener: DialogListener) : Di
                 when {
                     name -> etName.error = context.getString(R.string.fields_error_check_in_name)
                     email -> etEmail.error = context.getString(R.string.fields_error_check_in_email)
+                    validEmail -> etEmail.error = context.getString(R.string.fields_error_check_in_email_valid)
                     else -> listener.onSubmitButtonClick(
                         etName.get(),
                         etEmail.get()

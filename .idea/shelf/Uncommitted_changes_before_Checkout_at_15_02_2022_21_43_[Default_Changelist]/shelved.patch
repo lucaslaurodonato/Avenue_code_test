@@ -1,0 +1,90 @@
+Index: app/src/main/java/com/lucasdonato/sicredi_bank_events/ui/details/dialog/CheckInDialog.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.lucasdonato.sicredi_bank_events.ui.details.dialog\r\n\r\nimport android.app.Dialog\r\nimport android.content.Context\r\nimport android.os.Bundle\r\nimport android.view.Gravity\r\nimport android.view.WindowManager\r\nimport android.widget.Button\r\nimport android.widget.EditText\r\nimport com.lucasdonato.sicredi_bank_events.R\r\nimport com.lucasdonato.sicredi_bank_events.utils.extensions.get\r\nimport com.lucasdonato.sicredi_bank_events.utils.extensions.validate\r\n\r\nclass CheckInDialog(context: Context, private val listener: DialogListener) : Dialog(context) {\r\n\r\n    private lateinit var btSubmit: Button\r\n    private lateinit var etName: EditText\r\n    private lateinit var etEmail: EditText\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.check_in_dialog)\r\n\r\n        btSubmit = findViewById(R.id.submit_button)\r\n        etName = findViewById(R.id.check_in_name_edit_text)\r\n        etEmail = findViewById(R.id.check_in_email_edit_text)\r\n\r\n        btSubmit.apply {\r\n            setOnClickListener {\r\n                val name = etName.validate()\r\n                val email = etEmail.validate()\r\n\r\n                etName.error = null\r\n                etEmail.error = null\r\n\r\n                when {\r\n                    name -> etName.error = context.getString(R.string.fields_error_check_in_name)\r\n                    email -> etEmail.error = context.getString(R.string.fields_error_check_in_email)\r\n                    else -> listener.onSubmitButtonClick(\r\n                        etName.get(),\r\n                        etEmail.get()\r\n                    )\r\n                }\r\n            }\r\n        }\r\n\r\n        val lp = WindowManager.LayoutParams()\r\n\r\n        lp.apply {\r\n\r\n            this@CheckInDialog.window?.let {\r\n                copyFrom(it.attributes)\r\n            }\r\n            width = WindowManager.LayoutParams.MATCH_PARENT\r\n            height = WindowManager.LayoutParams.WRAP_CONTENT\r\n            gravity = Gravity.CENTER\r\n        }\r\n\r\n        this.window?.let {\r\n            it.setBackgroundDrawableResource(android.R.color.transparent)\r\n            it.attributes = lp\r\n            it.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)\r\n        }\r\n    }\r\n\r\n    interface DialogListener {\r\n        fun onSubmitButtonClick(name: String, email: String)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/lucasdonato/sicredi_bank_events/ui/details/dialog/CheckInDialog.kt b/app/src/main/java/com/lucasdonato/sicredi_bank_events/ui/details/dialog/CheckInDialog.kt
+--- a/app/src/main/java/com/lucasdonato/sicredi_bank_events/ui/details/dialog/CheckInDialog.kt	(revision 727df4c9ecfcfdc6b5a13b0e6a31fe17a18bf365)
++++ b/app/src/main/java/com/lucasdonato/sicredi_bank_events/ui/details/dialog/CheckInDialog.kt	(date 1644972107611)
+@@ -8,6 +8,7 @@
+ import android.widget.Button
+ import android.widget.EditText
+ import com.lucasdonato.sicredi_bank_events.R
++import com.lucasdonato.sicredi_bank_events.utils.extensions.confirmIfEmailIsValid
+ import com.lucasdonato.sicredi_bank_events.utils.extensions.get
+ import com.lucasdonato.sicredi_bank_events.utils.extensions.validate
+ 
+@@ -29,6 +30,7 @@
+             setOnClickListener {
+                 val name = etName.validate()
+                 val email = etEmail.validate()
++                val isEmail = confirmIfEmailIsValid(etEmail.get())
+ 
+                 etName.error = null
+                 etEmail.error = null
+@@ -36,6 +38,7 @@
+                 when {
+                     name -> etName.error = context.getString(R.string.fields_error_check_in_name)
+                     email -> etEmail.error = context.getString(R.string.fields_error_check_in_email)
++                    isEmail -> etEmail.error = context.getString(R.string.fields_error_check_in_email_valid)
+                     else -> listener.onSubmitButtonClick(
+                         etName.get(),
+                         etEmail.get()
+Index: app/src/main/res-details/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n\r\n    <string name=\"description_events_details\">Detalhes</string>\r\n    <string name=\"description_events_day\">Dia do evento</string>\r\n    <string name=\"description_events_address\">Endereço</string>\r\n    <string name=\"description_events_open_maps\">Abrir GPS</string>\r\n    <string name=\"description_events_price\">Preço para entrar</string>\r\n    <string name=\"description_check_in_button\">Check-In</string>\r\n\r\n     <!--Dialog check in-->\r\n    <string name=\"check_in_title\">Check-in</string>\r\n    <string name=\"check_in_message\">Para fazer seu check-in inicial preencha os dados abaixo.</string>\r\n    <string name=\"check_in_name\">Nome</string>\r\n    <string name=\"check_in_email\">E-mail</string>\r\n    <string name=\"check_in_send_button\">Enviar</string>\r\n\r\n    <string name=\"fields_error_check_in_name\">Insira um nome</string>\r\n    <string name=\"fields_error_check_in_email\">Insira um email</string>\r\n\r\n    <string name=\"success_in_check_in\">Seu check-in foi realizado com sucesso</string>\r\n    <string name=\"error_in_check_in\">Erro ao realizar o check-in</string>\r\n\r\n    <string name=\"shared_text\">Eai bora? \\nSegue os dados do evento \\nNome: %s \\nEndereço: %s \\nData: %s</string>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res-details/values/strings.xml b/app/src/main/res-details/values/strings.xml
+--- a/app/src/main/res-details/values/strings.xml	(revision 727df4c9ecfcfdc6b5a13b0e6a31fe17a18bf365)
++++ b/app/src/main/res-details/values/strings.xml	(date 1644971971827)
+@@ -16,6 +16,7 @@
+ 
+     <string name="fields_error_check_in_name">Insira um nome</string>
+     <string name="fields_error_check_in_email">Insira um email</string>
++    <string name="fields_error_check_in_email_valid">Insira um email válido</string>
+ 
+     <string name="success_in_check_in">Seu check-in foi realizado com sucesso</string>
+     <string name="error_in_check_in">Erro ao realizar o check-in</string>
+Index: app/src/main/java/com/lucasdonato/sicredi_bank_events/utils/extensions/Extension.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.lucasdonato.sicredi_bank_events.utils.extensions\r\n\r\nimport android.app.Activity\r\nimport android.view.View\r\nimport android.view.View.*\r\nimport android.widget.EditText\r\nimport android.widget.Toast\r\nimport java.text.NumberFormat\r\nimport java.text.SimpleDateFormat\r\nimport java.util.*\r\n\r\nfun convertLongToTime(time: Long): String {\r\n    val date = Date(time)\r\n    val format = SimpleDateFormat(\"dd.MM.yyyy - HH:mm\")\r\n    return format.format(date)\r\n}\r\n\r\nfun convertToPrice(price: Double): String {\r\n    val str: String = NumberFormat.getCurrencyInstance().format(price)\r\n    return str\r\n}\r\n\r\nfun EditText.get() = text.toString().trim()\r\n\r\nfun EditText.validate() = text.toString().trim().isEmpty()\r\n\r\nfun View.gone() {\r\n    visibility = GONE\r\n}\r\n\r\nfun View.visible() {\r\n    visibility = VISIBLE\r\n}\r\n\r\nfun View.invisible() {\r\n    visibility = INVISIBLE\r\n}\r\n\r\nfun Activity.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()\r\n\r\nfun View.toast(message: String) = Toast.makeText(context, message, Toast.LENGTH_LONG).show()\r\n\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/lucasdonato/sicredi_bank_events/utils/extensions/Extension.kt b/app/src/main/java/com/lucasdonato/sicredi_bank_events/utils/extensions/Extension.kt
+--- a/app/src/main/java/com/lucasdonato/sicredi_bank_events/utils/extensions/Extension.kt	(revision 727df4c9ecfcfdc6b5a13b0e6a31fe17a18bf365)
++++ b/app/src/main/java/com/lucasdonato/sicredi_bank_events/utils/extensions/Extension.kt	(date 1644971854688)
+@@ -1,6 +1,7 @@
+ package com.lucasdonato.sicredi_bank_events.utils.extensions
+ 
+ import android.app.Activity
++import android.util.Patterns
+ import android.view.View
+ import android.view.View.*
+ import android.widget.EditText
+@@ -8,6 +9,7 @@
+ import java.text.NumberFormat
+ import java.text.SimpleDateFormat
+ import java.util.*
++import java.util.regex.Pattern
+ 
+ fun convertLongToTime(time: Long): String {
+     val date = Date(time)
+@@ -40,7 +42,10 @@
+ 
+ fun View.toast(message: String) = Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+ 
+-
++fun confirmIfEmailIsValid(email: String): Boolean {
++    val pattern: Pattern = Patterns.EMAIL_ADDRESS
++    return pattern.matcher(email).matches().not()
++}
+ 
+ 
+ 
